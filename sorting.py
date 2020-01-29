@@ -212,3 +212,60 @@ def quick_sort(nums):  # n^2
             _quick_sort(items, split_index + 1, high)
 
     _quick_sort(nums, 0, nums.get_len() - 1)
+    
+    # Python program for implementation of Radix Sort 
+
+# A function to do counting sort of arr[] according to 
+# the digit represented by exp. 
+def countingSort(nums, exp1): 
+
+	n = len(nnums) 
+
+	# The output array elements that will have sorted arr 
+	output = [0] * (n) 
+
+	# initialize count array as 0 
+	count = [0] * (10) 
+
+	# Store count of occurrences in count[] 
+	for i in range(0, n): 
+		index = (nums[i]/exp1) 
+		count[ (index)%10 ] += 1
+
+	# Change count[i] so that count[i] now contains actual 
+	# position of this digit in output array 
+	for i in range(1,10): 
+		count[i] += count[i-1] 
+
+	# Build the output array 
+	i = n-1
+	while i>=0: 
+		index = (nums[i]/exp1) 
+		output[ count[ (index)%10 ] - 1] = nums[i] 
+		count[ (index)%10 ] -= 1
+		i -= 1
+
+	# Copying the output array to arr[], 
+	# so that arr now contains sorted numbers 
+	i = 0
+	for i in range(0,len(nums)): 
+		nums[i] = output[i] 
+
+# Method to do Radix Sort 
+def radix_sort(nums): 
+
+	# Find the maximum number to know number of digits 
+	max1 = max(nums) 
+
+	# Do counting sort for every digit. Note that instead 
+	# of passing digit number, exp is passed. exp is 10^i 
+	# where i is current digit number 
+	exp = 1
+	while max1/exp > 0: 
+		countingSort(nums,exp) 
+		exp *= 10
+
+
+
+    
+    
